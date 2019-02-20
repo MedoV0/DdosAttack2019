@@ -4,7 +4,6 @@
 import os
 import sys
 import time
-import socket
 import urllib
 import random
 import httplib
@@ -12,8 +11,6 @@ import urllib2
 import datetime
 import requests
 import threading
-from random import randrange
-from threading import Thread
 
 Close = False
 Lock = threading.Lock()
