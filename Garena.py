@@ -18,47 +18,93 @@ request_counter = 0
 Request_counter = 0
 headers_referers= []
 
-
 def getUserAgent():
-    platform = random.choice(['Macintosh', 'Windows', 'X11'])
+    #Get platform:
+    platform = random.choice(['Macintosh', 'Windows', 'X11', 'Android','Windows Phone','BlackBerry OS','Symbian'])
     if platform == 'Macintosh':
         os  = random.choice(['68K', 'PPC','Intel Mac OS X 10.8.2 Mountain Lion','Intel Mac OS X 10.9 Marvericks','Intel Mac OS X 10.10 Yosemite','Intel Mac OS X 10.11 El Capitan','Intel Mac OS 10.12 Sierra'])
     elif platform == 'Windows':
         os  = random.choice(['Win3.11', 'WinNT3.51', 'WinNT4.0', 'Windows NT 5.0', 'Windows NT 5.1', 'Windows NT 5.2', 'Windows NT 6.0', 'Windows NT 6.1', 'Windows NT 6.2', 'Win95', 'Win98', 'Win 9x 4.90', 'WindowsCE', 'Windows 7', 'Windows 8','Windows 10'])
     elif platform == 'X11':
-        os  = random.choice(['Linux i686', 'Linux x86_64', 'Linux i386'])
-        
-    browser = random.choice(['chrome', 'firefox', 'ie'])
+        os  = random.choice(['Linux i686', 'Linux x86_64', 'Linux i386', ' Linux Core i7-4980HQ','Linux i586','Linux armv7l'])
+    elif platform == 'Android':
+        os  = random.choice(['Android 1.5 ', 'Android 1.6', 'Android 2.0','Android 2.1','Android 2.2','Android 2.2.3','Android 2.3','Android 2.3.7','Android 3.0','Android 3.2.6','Android 4.0','Android 4.0.4','Android 4.1','Android 4.3.1','Android 4.4','Android 4.4.4','Android 5.0','Android 5.1.1','Android 6.0','Android 6.0.1','Android 7.0','Android 7.1.2','Android 8.0','Android 8.1','Android 9.0'])
+    elif platform == 'Windows Phone':
+        os  = random.choice(['Windows Phone 8.0', 'Windows Phone 8.1', 'Windows Phone 10.0', 'Windows Phone OS 7.5'])
+    elif platform == 'Symbian':
+        os  = random.choice(['Nokia200', 'Nokia201', 'NokiaC3-00','Nokia3250','Nokia7650','Nokia3650','NokiaN-Gage','NokiaSX1','Nokia6600','NokiaN93','NokiaE61i','NokiaN93i','Nokia9300i','Nokia7700','Nokia Arima ASP805','Nokia Motorola A920','Nokia Sony Ericsson P990','Nokia 6110 Navigator','Nokia Samsung SGH-D700','Nokia Siemens SX1','Nokia Sendo X & X2','Nokia N-Gage & N-Gage QD','Nokia 6120/6121 Classic'])
+    elif platform == 'BlackBerry OS':
+        os  = random.choice(['BlackBerry 9780', 'BlackBerry 9300', 'BlackBerry 9700','BlackBerry 9900','BlackBerry 9320','BlackBerry 9360','BlackBerry 9810','BlackBerry 9930','BlackBerry 9790','BlackBerry 9860','BlackBerry 9650','BlackBerry 9981','BlackBerry 9720'])
+    #Get browser:    
+    browser = random.choice(['chrome', 'firefox', 'ie','opera','opera mini','androi browser','uc','safari','outlook'])
     if browser == 'chrome':
         webkit = str(random.randint(500, 599))
         version = str(random.randint(0, 28)) + '.0' + str(random.randint(0, 1500)) + '.' + str(random.randint(0, 999))
         return 'Mozilla/5.0 (' + os + ') AppleWebKit/' + webkit + '.0 (KHTML, like Gecko) Chrome/' + version + ' Safari/' + webkit
+    
     elif browser == 'firefox':
-        currentYear = datetime.date.today().year
-        year = str(random.randint(2000, currentYear))
-        month = random.randint(1, 12)
-        if month < 10:
-            month = '0' + str(month)
-        else:
-            month = str(month)
-        day = random.randint(1, 31)
-        if day < 10:
-            day = '0' + str(day)
-        else:
-            day = str(day)
-        gecko = year + month + day
-        version = str(random.randint(1, 21)) + '.0'
-        return 'Mozilla/5.0 (' + os + '; rv:' + version + ') Gecko/' + gecko + ' Firefox/' + version
+         currentYear = datetime.date.today().year
+         year = str(random.randint(2000, currentYear))
+         month = random.randint(1, 12)
+         if  month < 10:
+             month = '0' + str(month)
+         else:
+             month = str(month)
+         day = random.randint(1, 31)
+         if  day < 10:
+             day = '0' + str(day)
+         else:
+             day = str(day)
+         gecko = year + month + day
+         version = str(random.randint(1, 21)) + '.0'
+         return 'Mozilla/5.0 (' + os + '; rv:' + version + ') Gecko/' + gecko + ' Firefox/' + version
+        
     elif browser == 'ie':
-        version = str(random.randint(1, 10)) + '.0'
-        engine = str(random.randint(1, 6)) + '.0'
-        option = random.choice([True, False])
-        if option == True:
+         version = str(random.randint(1, 10)) + '.0'
+         engine = str(random.randint(1, 6)) + '.0'
+         option = random.choice([True, False])
+         if option == True:
             token = random.choice(['.NET CLR', 'SV1', 'Tablet PC', 'Win64; IA64', 'Win64; x64', 'WOW64']) + '; '
-        else:
+         else:
             token = ''
-        return 'Mozilla/5.0 (compatible; MSIE ' + version + '; ' + os + '; ' + token + 'Trident/' + engine + ')'
+         return 'Mozilla/5.0 (compatible; MSIE ' + version + '; ' + os + '; ' + token + 'Trident/' + engine + ')'
 
+    elif browser == 'opera':
+         engine = str(random.randint(10, 400)) + '.0'
+         version = str(random.randint(1, 20)) + '.0'
+         option = random.choice([True, False])
+         if option == True:
+            token = random.choice(['.NET CLR', 'SV1', 'Tablet PC', 'Win64; IA64', 'Win64; x64', 'WOW64']) + '; '
+         else:
+            token = ''
+         return 'Opera/9.80 (' + os + ';' + token  + 'Presto/2.' + engine + 'Version/12.' + version + ')'
+        
+    elif browser == 'opera mini':
+         engine = str(random.randint(10, 400)) + '.0'
+         version = str(random.randint(1, 20)) + '.0'
+         option = random.choice([True, False])
+         return 'Opera/9.80 (J2ME/MIDP; Opera Mini/' + '5.1.21051/28.3392; U; en)' + 'Presto/2.' + engine + 'Version/12.' + version + ')'
+        
+    elif browser == 'androi browser':
+         webkit = str(random.randint(500, 599))
+         version = str(random.randint(0, 28)) + '.0' + str(random.randint(0, 1500)) + '.' + str(random.randint(0, 999))
+         return 'Mozilla/5.0 (' + os + ';de-de; GT-I8190 Build/JZO54K) AppleWebKit/' + webkit + '.0 (KHTML, like Gecko) Version/' + version + ' Mobile Safari/' + webkit
+
+    elif browser == 'uc':
+         webkit = str(random.randint(500, 599))
+         version = str(random.randint(0, 28)) + '.0' + str(random.randint(0, 1500)) + '.' + str(random.randint(0, 999))
+         return 'Mozilla/5.0 (' + os + 'zh-CN; F5121 Build/34.0.A.1.247) AppleWebKit/' + webkit + '.0 (KHTML, like Gecko) Version/' + version + ' Chrome/40.0.2214.89 UCBrowser/11.5.1.944 Mobile Safari/' + webkit
+
+    elif browser == 'safari':
+         webkit = str(random.randint(500, 599))
+         version = str(random.randint(0, 28)) + '.0' + str(random.randint(0, 1500)) + '.' + str(random.randint(0, 999))
+         return 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X)' + ') AppleWebKit/' + webkit + '.0 (KHTML, like Gecko) Version/' + version + ' Mobile Safari/' + webkit
+
+    elif browser == 'outlook':
+         version = str(random.randint(0, 28)) + '.0' + str(random.randint(0, 1500)) + '.' + str(random.randint(7000,9000))
+         return 'Microsoft Office/14.0 (' + os + 'Microsoft Outlook' + version + '; Pro)'
+
+     
 
 def referer_list():
     try :
